@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Pincode;
-use App\State;
+use App\Models\Pincode;
+
 
 class PinController extends Controller
 {
@@ -29,6 +29,6 @@ class PinController extends Controller
         $district = $request->query('district');
         $state = $request->query('state');
         $result = $pincodeModel->getPincodes($district, $state);
-        return ;
+        return $result;
     }
 }

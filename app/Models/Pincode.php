@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,19 +35,20 @@ class Pincode extends Model
         $statedetails = $addresses[0]->state;
         $result['statename'] = $statedetails['statename'];
         $result['statecode'] = $statedetails['statecode'];
-        return $result;
+        return response()->json($result);
     }
 
 
     public function getPincodes($district, $state)
     {
-        $pincodes = $this->where('district', $district)->get();
-        return $pincodes;
+        $pincodes = $this->where([['district', $district],['statename',$state]]) -> pluck('pincode');
+
+        return response()->json(['pincodes' => $pincodes]);
     }
     
 
     public function state()
     {
-        return $this->belongsTo('App\State', 'statename', 'statename');
+        return $this->belongsTo('App\Models\State', 'statename', 'statename');
     }
 }
