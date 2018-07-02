@@ -15,8 +15,13 @@ class CreatePincodesTable extends Migration
     {
         Schema::create('pincode', function (Blueprint $table) {
             $table->increments('id');
-            $table->int('pincode');
             $table->string('officename');
+            $table->integer('pincode');
+            $table->string('officetype');
+            $table->string('deliverystatus');
+            $table->string('divisionname');
+            $table->string('regionname');
+            $table->string('circlename');
             $table->string('taluk');
             $table->string('districtname');
             $table->string('statename');
@@ -31,6 +36,6 @@ class CreatePincodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pincodes');
+        Schema::dropIfExists('pincode');
     }
 }
