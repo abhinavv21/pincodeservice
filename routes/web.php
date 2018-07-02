@@ -16,6 +16,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('/{pincode}', 'PinController@getAddress');
+Route::get('/pincode/{pincode}', 'PinController@getAddress')->where('pincode', '[0-9]+');
 
-Route::get('/', 'PinController@getPincodes');
+Route::get('/address', 'PinController@getPincodes');

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Pincode;
-use App\State;
+use App\Services\PinService;
+
 
 class PinController extends Controller
 {
@@ -16,19 +15,17 @@ class PinController extends Controller
      * @param  int  $pincode
      * @return Response
      */
-    public function getAddress($pincode)
+    public function getAddress($pincode, PinService $pinServiceInstance)
     {
-        $pincodeModel = new Pincode();
-        $result = $pincodeModel->getAddress($pincode);
-        return $result;
+        return $pinServiceInstance->getAddress($pincode);
+    }
 
-    }
-    public function getPincodes(Request $request)
+    /**
+     * get pincodes given state and city details
+     */
+    public function getPincodes(Request $request, PinService $pinServiceInstance)
     {
-        $pincodeModel = new Pincode();
-        $district = $request->query('district');
-        $state = $request->query('state');
-        $result = $pincodeModel->getPincodes($district, $state);
-        return ;
+        return $pinServiceInstance->getPincodes($request);
     }
+
 }
