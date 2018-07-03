@@ -49,8 +49,8 @@ class Pincode extends Model
 
     public function getPincodes($district, $state)
     {
-        $pincodes = $this->where([[self::DISTRICT, $district],[self::STATENAME,$state]]) -> pluck(self::PINCODE)->unique();
-
+        $pincodes = $this->where([[self::DISTRICT, $district],[self::STATENAME,$state]]) -> pluck(self::PINCODE);
+        $pincodes = $pincodes->unique()->values();
         if ($pincodes->isEmpty() === true)
         {
             abort(404, 'no matching records found');
