@@ -2,6 +2,8 @@
 
 namespace App\Validations;
 
+use Illuminate\Support\Facades\Validator as Validator;
+
 class PinValidator
 {
     const PIN_UPPER_LIMIT = 859999;
@@ -22,8 +24,9 @@ class PinValidator
     public static function validateAddress($address)
     {
 
+        $validator = Validator::make(['address' => $address], ['address' => 'required|max:255']);
 
-        if (!preg_match('/[^A-Za-z\ ]/', $address))
+        if (!($validator->fails()) or (!preg_match('/[^A-Za-z\ ]/', $address)))
         {
                 return true;
         }
